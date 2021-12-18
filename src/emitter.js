@@ -2,9 +2,9 @@ import Emitter from 'tiny-emitter'
 
 export const emitter = new Emitter()
 
-export function registHook(options) {
+export function registHook(options, context = {}) {
   Object.entries(options).forEach(([event, handler]) => {
-    emitter.on(event, handler)
+    emitter.on(event, handler, context)
   })
 }
 
@@ -30,6 +30,13 @@ export default {
             binding.dir.registered[binding.modifiers]
           )
         })
+      },
+    })
+    app.mixin({
+      created() {
+        if (this.$options.hook) {
+          registHook(this.$options.hook, this)
+        }
       },
     })
   },
