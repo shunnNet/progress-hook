@@ -13,6 +13,20 @@ export default {
     clickA() {
       this.count++
     },
+    clickReset() {
+      console.log('got Reset Trigger')
+    },
+  },
+  trigger: {
+    clickReset: {
+      prepend() {
+        console.log('Do something before event emit...')
+      },
+      append() {
+        console.log('Do something after event emit...')
+      },
+      value: 'trigger value',
+    },
   },
   setup() {
     const handleClick = () => {
@@ -31,7 +45,11 @@ export default {
 <template>
   <img alt="Vue logo" src="./assets/logo.png" @click="test" />
   {{ count }}
-  <HelloWorld msg="Hello Vue 3 + Vite" v-hook:test.click="123" />
+  <HelloWorld
+    msg="Hello Vue 3 + Vite"
+    v-hook:test.click="123"
+    @hello="clickReset"
+  />
 </template>
 
 <style>

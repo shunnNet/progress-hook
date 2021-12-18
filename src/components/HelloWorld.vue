@@ -4,7 +4,7 @@ import { btnB } from '../composable/btnB'
 import { btnC } from '../composable/btnC'
 import { btnD } from '../composable/btnD'
 export default {
-  emits: ['component'],
+  emits: ['hello'],
   setup() {
     return {
       btnA,
@@ -18,7 +18,7 @@ export default {
 
 <template>
   <div>
-    <p @click="$emit('component')">
+    <p @click="$emit('hello')">
       Recommended IDE setup:
       <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
       +

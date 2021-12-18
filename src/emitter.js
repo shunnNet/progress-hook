@@ -37,6 +37,15 @@ export default {
         if (this.$options.hook) {
           registHook(this.$options.hook, this)
         }
+        if (this.$options.trigger) {
+          Object.entries(this.$options.trigger).forEach(([event, options]) => {
+            this[event] = function () {
+              options.prepend && options.prepend()
+              emitter.emit(event, options.value)
+              options.prepend && options.append()
+            }
+          })
+        }
       },
     })
   },
